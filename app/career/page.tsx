@@ -3,7 +3,7 @@ import "./styles.css"
 
 import { CAREER_DATA } from "./careersData";
 import { BsArrowDownSquareFill, BsArrowLeftSquareFill, BsArrowRightSquareFill,  BsArrowUpSquareFill } from "react-icons/bs";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { RiSpace } from "react-icons/ri";
 import Image from "next/image";
 
@@ -70,7 +70,7 @@ useEffect(() => {
     snipper.style.transform = `translate(${container?.offsetWidth / 2}px, ${container?.offsetHeight / 2}px)`
   }
 
-  setInterval(() => {
+  const duckTargetInterval = setInterval(() => {
     const ducks = getDucksRect()
     const snipperRec = getSnipperRect(snipper)
     const drops = getDrops()
@@ -206,6 +206,7 @@ useEffect(() => {
   return () => {
     document.removeEventListener("keydown", keyDownHandler)
     document.removeEventListener("keyup", keyUpHandler)
+    clearInterval(duckTargetInterval)
   }
 }, [])
 
@@ -213,7 +214,7 @@ const Timeline = () => {
   return (
     <div className="w-full overflow-hidden mt-auto">
       <div className="flex w-full">
-        <div className="flex flex-row-reverse w-full justify-between timeline-effect">
+        <div className="flex flex-row-reverse w-full justify-between timeline-effect py-2">
            {CAREER_DATA.map((data,i) => {
              return (
               <div key={"dataName" + i} className="flex flex-col relative">
@@ -267,7 +268,7 @@ const Timeline = () => {
           <div className="w-full border border-white border-dashed top-1/2 absolute"></div>
         </div>
         <Timeline/>
-        <div className="flex justify-around items-end gap-4 basis-1/2 w-full">
+        <div className="flex justify-around items-end gap-4 basis-1/3 w-full">
           <div className="flex flex-col justify-center items-center gap-2">
             <RiSpace id="spaceKey" size={50} style={{...spaceKeyStyles }}/>
             <div className="text-sm">Press space to fire</div>
