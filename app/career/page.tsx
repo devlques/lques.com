@@ -3,11 +3,15 @@ import "./styles.css"
 
 import { CAREER_DATA } from "./careersData";
 import { BsArrowDownSquareFill, BsArrowLeftSquareFill, BsArrowRightSquareFill,  BsArrowUpSquareFill } from "react-icons/bs";
-import { useCallback, useEffect } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { RiSpace } from "react-icons/ri";
 import Image from "next/image";
+import Modal from "@/components/Modal";
 
 export default function Career(){
+
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [dataId, setDataId] = useState<string>("1");
 
 const getDucksRect = useCallback(() => {
   const result:any = {}
@@ -48,6 +52,17 @@ const checkOverlap = useCallback((duckRect:any, snipperRec: any) => {
     return true
   }
 }, [])
+
+useEffect(() => {
+  const timeline = document.querySelector("#timeline") as HTMLElement
+  if(openModal){
+   timeline.style.opacity = "0"
+  }else{
+    timeline.style.opacity = "100%"
+  }
+
+},[openModal])
+
 useEffect(() => {
   const snipper = document.querySelector<HTMLElement>("#snipper") as HTMLElement
   const container = snipper.parentElement as HTMLElement
@@ -74,9 +89,10 @@ useEffect(() => {
     const ducks = getDucksRect()
     const snipperRec = getSnipperRect(snipper)
     const drops = getDrops()
+    const closeModal = document.querySelector("#closeModal") as HTMLElement
 
     if(checkOverlap(ducks.duck1.duckRect, snipperRec)){
-      ducks.duck1.element.style.border = "3px dashed red" 
+      ducks.duck1.element.style.border = "3px dashed red" ;
       ducks.duck1.element.classList.add("faster-move-effect") 
       drops.drop1.classList.remove('hidden')
     }else{
@@ -111,6 +127,9 @@ useEffect(() => {
   const keyDownHandler = (e:KeyboardEvent) => {
     e.preventDefault()
 
+    if(e.code.toLowerCase() === "escape"){
+        setOpenModal(false)
+    }
     if(e.code.toLowerCase() === "space"){
       snipper.classList.remove("shoot-effect")
       snipper.classList.add("shoot-effect")
@@ -120,7 +139,13 @@ useEffect(() => {
       const ducks = getDucksRect()
       for (const key in ducks) {
           if(ducks[key].element.classList.contains('faster-move-effect')){
+              const dataId = key.split("").pop() as string
               ducks[key].element.style.backgroundColor = "orange"
+              setTimeout(() => {
+                setDataId(dataId)
+                setOpenModal(true)
+              }, 200)
+              
           }
       }
     }
@@ -175,10 +200,10 @@ useEffect(() => {
       spaceKey.style.color = "black"
       spaceKey.style.backgroundColor = "white"
       spaceKey.style.outline = "none"
-      const ducks = getDucksRect()
-      for (const key in ducks) {
-        ducks[key].element.style.backgroundColor = null
-      }
+      //const ducks = getDucksRect()
+      //for (const key in ducks) {
+        //ducks[key].element.style.backgroundColor = null
+      //}
     }
     if(e.code.toLowerCase() === "arrowup"){
       upArrow.style.color = "white"
@@ -210,11 +235,11 @@ useEffect(() => {
   }
 }, [])
 
-const Timeline = () => {
+const Timeline = memo(() => {
   return (
-    <div className="w-full overflow-hidden mt-auto">
+    <div id="timeline" className="w-full overflow-hidden mt-auto">
       <div className="flex w-full">
-        <div className="flex flex-row-reverse w-full justify-between timeline-effect py-2">
+        <div id="timeline-row" className="flex flex-row-reverse w-full justify-between timeline-effect py-2">
            {CAREER_DATA.map((data,i) => {
              return (
               <div key={"dataName" + i} className="flex flex-col relative">
@@ -248,7 +273,7 @@ const Timeline = () => {
         </div>
       </div>
     )
-  }
+  })
   
   const arrowStyles = {
     "borderRadius": "10px",
@@ -259,11 +284,13 @@ const Timeline = () => {
     "color": "black",
     "width": "100%"
   }
+
   return(
       <div id="snipper-container" className="flex flex-col h-full w-full overflow-hidden relative">
+        <Modal openStatus={openModal} setOpenStatus={setOpenModal} selectedDataId={dataId}/>
         <div 
           id="snipper" 
-          className="size-36 rounded-full bg-transparent border-2 absolute hidden z-30">
+          className="size-24 rounded-full bg-transparent border-2 absolute hidden z-30">
           <div className="h-full border border-white border-dashed left-1/2 absolute"></div>
           <div className="w-full border border-white border-dashed top-1/2 absolute"></div>
         </div>

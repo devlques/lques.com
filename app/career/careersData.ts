@@ -1,5 +1,6 @@
 export const CAREER_DATA =  [
   {
+    id: "1",
     company: "Steadworth.com",
     type: "Real State Service",
     title: "Software Developer",
@@ -24,6 +25,7 @@ export const CAREER_DATA =  [
     ],
   },
   {
+    id: "2",
     company: "Publicis Global Delivery",
     type: "Digital Agency",
     title: "Sr.Software Engineer",
@@ -64,6 +66,7 @@ export const CAREER_DATA =  [
     ]
    }, 
   {
+    id: "3",
     company: "Publicis Global Delivery",
     type: "Digital Agency",
     title: "Web Content Lead",
