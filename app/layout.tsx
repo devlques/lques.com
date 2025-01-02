@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { VT323 } from 'next/font/google'
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -20,6 +21,12 @@ export const metadata: Metadata = {
   description: "Personal website",
 };
 
+ 
+const vt323 = VT323({ 
+  weight: "400",
+  subsets: ['latin'], 
+  variable: "--font-vt323"
+})
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,7 +35,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-black to-gray-800`}
+        className={`${vt323.variable} ${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-black to-gray-800 
+      font-[family-name:var(--font-vt323)] text-2xl
+`}
       >
         <div className="h-screen flex flex-col justify-between">
         <div className="bg-transparent basis-1/12">
