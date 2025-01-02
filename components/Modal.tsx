@@ -57,9 +57,13 @@ export default function Modal({openStatus, setOpenStatus, selectedDataId}:ModalP
                 <div
                   className="border-b border-dashed"
                 ><span className="text-white">Project: </span>{project.product}</div>  
-                {project.reference.length > 0 && <div
-                  className="border-b border-dashed"
-                ><span className="text-white">Visit: </span> <a href={project.reference} target="_blank">{project.reference}</a></div> }
+                {project.reference.length > 0 && (
+                  <div className="border-b border-dashed text-white w-full">
+                    <a href={project.reference} target="_blank" >
+                      Visit website
+                    </a>
+                  </div>
+                )}
                 <div
                   className="border-b border-dashed"
                 ><span className="text-white">Role: </span>{` ${project.roleDescription}`}</div>  
