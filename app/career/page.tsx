@@ -89,7 +89,6 @@ useEffect(() => {
     const ducks = getDucksRect()
     const snipperRec = getSnipperRect(snipper)
     const drops = getDrops()
-    const closeModal = document.querySelector("#closeModal") as HTMLElement
 
     if(checkOverlap(ducks.duck1.duckRect, snipperRec)){
       ducks.duck1.element.style.border = "3px dashed red" ;
@@ -130,6 +129,7 @@ useEffect(() => {
     if(e.code.toLowerCase() === "escape"){
         setOpenModal(false)
     }
+
     if(e.code.toLowerCase() === "space"){
       snipper.classList.remove("shoot-effect")
       snipper.classList.add("shoot-effect")
@@ -200,10 +200,6 @@ useEffect(() => {
       spaceKey.style.color = "black"
       spaceKey.style.backgroundColor = "white"
       spaceKey.style.outline = "none"
-      //const ducks = getDucksRect()
-      //for (const key in ducks) {
-        //ducks[key].element.style.backgroundColor = null
-      //}
     }
     if(e.code.toLowerCase() === "arrowup"){
       upArrow.style.color = "white"
@@ -242,7 +238,7 @@ const Timeline = memo(() => {
         <div id="timeline-row" className="flex flex-row-reverse w-full justify-between timeline-effect py-2">
            {CAREER_DATA.map((data,i) => {
              return (
-              <div key={"dataName" + i} className="flex flex-col relative">
+              <div key={"dataName" + i} className="flex flex-col relative items-center">
                 <span className="">
                     {data.company}
                   </span>
