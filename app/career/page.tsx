@@ -239,28 +239,25 @@ const Timeline = memo(() => {
            {CAREER_DATA.map((data,i) => {
              return (
               <div key={"dataName" + i} className="flex flex-col relative items-center">
-                <span className="">
-                    {data.company}
-                  </span>
-                  <span className="">
-                    {data.period}
-                  </span>
-                <Image 
-                  className="absolute top-20 left-14 z-10 dropItem hidden"
-                  alt="drop of water pixel art"
-                  src="/dropWaterPixA.svg" 
-                  width={40} height={40} 
-                  unoptimized  
-                />
-                <div className="transform scale-x-[-1]">
-
-                <Image 
-                  className=" move-effect rounded-full duckItem"
-                  alt="duck pixel art"
-                  src="/pixelDuckNoBg.svg" 
-                  width={150} height={150} 
-                  unoptimized  
-                />
+                <span className=""> {data.company} </span>
+                <span className=""> {data.period} </span>
+                <div className="w-fit relative">
+                  <div className="transform scale-x-[-1]">
+                    <Image 
+                      className=" move-effect rounded-full duckItem"
+                      alt="duck pixel art"
+                      src="/pixelDuckNoBg.svg" 
+                      width={150} height={150} 
+                      unoptimized  
+                    />
+                  </div> 
+                  <Image 
+                    className="absolute top-1/4 left-1/4 z-10 dropItem hidden"
+                    alt="drop of water pixel art"
+                    src="/dropWaterPixA.svg" 
+                    width={40} height={40} 
+                    unoptimized  
+                  />
                 </div>
                </div>
               )
