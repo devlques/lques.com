@@ -1,28 +1,26 @@
 .timeline-effect {
-  animation: 20s linear 0s infinite timeline
+  animation: 20s linear 0s infinite timeline;
 }
 
 .shoot-effect {
-  animation: 0.1s ease-out 0s 1 shoot
+  animation: 0.1s ease-out 0s 1 shoot;
 }
 
 .move-effect {
-  animation: 0.5s ease-in 0s infinite move
+  animation: 0.5s ease-in 0s infinite move;
 }
 
 .faster-move-effect {
-  animation: 0.1s ease-in 0s infinite faster-move
+  animation: 0.1s ease-in 0s infinite faster-move;
 }
-
 
 @keyframes timeline {
   0% {
-    transform: translateX(-100%)
+    transform: translateX(-100%);
   }
   100% {
-    transform: translateX(100%)
+    transform: translateX(100%);
   }
-
 }
 
 @keyframes shoot {
@@ -37,19 +35,21 @@
 }
 
 @keyframes move {
-  0%, 100% {
-    transform: translateY(0)
+  0%,
+  100% {
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(3px)
+    transform: translateY(3px);
   }
 }
 
 @keyframes faster-move {
-  0%, 100% {
-    transform: translateY(0)
+  0%,
+  100% {
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(5px)
+    transform: translateY(5px);
   }
 }

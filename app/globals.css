@@ -36,17 +36,15 @@ body {
   border-radius: 10px;
 }
 
-
 .slide-from-top {
-  animation: 0.2s ease-in 0s 1 slide-f-t
+  animation: 0.2s ease-in 0s 1 slide-f-t;
 }
 
 @keyframes slide-f-t {
   0% {
-    transform: translateY(-100%)
+    transform: translateY(-100%);
   }
   100% {
-    transform: translateY(0)
+    transform: translateY(0);
   }
-
 }
