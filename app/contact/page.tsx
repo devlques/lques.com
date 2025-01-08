@@ -1,7 +1,7 @@
-export default function Contact(){
+import ContactForm from "@/components/ContactForm"
+
+export default async function Contact(){
   return  (
-    <div className="h-screen">
-      Contact me
-    </div>
+    <ContactForm/> 
   )
 }
