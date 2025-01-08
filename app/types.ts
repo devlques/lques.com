@@ -10,5 +10,5 @@ export interface ActionResponse {
   errors?: {
     [K in keyof ContactFormData]?: string[];
   };
-  inputs?: ContactFormData;
+  inputs: ContactFormData;
 }

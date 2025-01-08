@@ -1,6 +1,7 @@
 'use server'
 import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2"
 import { ActionResponse, ContactFormData } from "../types";
+import { z } from "zod";
 
 const awsConfig = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -8,6 +9,11 @@ const awsConfig = {
   region: 'us-west-2', 
 }
 
+const contactFormSchema = z.object({
+  name: z.string().min(1, 'Name is required.').max(20,'Name cannot be more than 25 characters long'),
+  email: z.string().email('Please provide a valid email address.'),
+  message: z.string().min(50, 'Message should be at least 50 characters long.')
+})
 async function sendContactEmailSES({...props}:ContactFormData) {
   const ses = new SESv2Client(awsConfig);
   const input = { 
@@ -41,7 +47,7 @@ async function sendContactEmailSES({...props}:ContactFormData) {
 }
 
 export default async function submitAction(
-  prevState: ActionResponse | null, 
+  prevState: ActionResponse, 
   formData: FormData
 ): Promise<ActionResponse>
 { 
@@ -50,6 +56,20 @@ export default async function submitAction(
   const name = formData.get('name') as string
   const email = formData.get('email') as string
   const message  = formData.get('message') as string
+
+  const validatedData = contactFormSchema.safeParse({name, email, message}) 
+  console.log('submitAction.validatedData', validatedData)
+  if(!validatedData.success){
+    console.log(validatedData.error.flatten().fieldErrors)
+    return {
+      success: validatedData.success,
+      errors: validatedData.error.flatten().fieldErrors,
+      message: 'Please fix the errors in order to submit.',
+      inputs: {
+...prevState.inputs
+}
+    }
+  }
   try {
       await sendContactEmailSES({name, email, message })
       successResult = true

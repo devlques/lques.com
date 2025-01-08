@@ -49,39 +49,48 @@ export default function ContactForm(){
           <input 
             type="text" 
             name="name" 
-            //defaultValue={state?.inputs?.name || '' } 
+            defaultValue={state?.inputs?.name || '' } 
             //value={state?.name || ''}
             //onChange={(e) => setFormData({...formData, name: e.target.value})}
             placeholder="Jone Jones"
-            className="rounded-3xl
+            className="rounded-3xl mb-2
             outline outline-offset-2 outline-white focus:outline-offset-4 text-gray-800 px-4
           "/>
+          {state?.errors?.name && (<div className="text-sm text-red-400">{state?.errors?.name[0]}</div>)}
         </label>
         <label>Email: <br/>  
           <input 
-            type="email" 
+            //type="email" 
             name="email" 
             placeholder="jone@email.com"
-            //defaultValue={state?.inputs?.email || '' } 
+            defaultValue={state?.inputs?.email || '' } 
             //value={state?.email || ''}
             //onChange={(e) => setFormData({...formData, email: e.target.value})}
             required
-            className="rounded-3xl
+            className="rounded-3xl mb-2
             outline outline-offset-2 outline-white focus:outline-offset-4  text-gray-800 px-4
            "/>
+          {state?.errors?.email && (<div className="text-sm text-red-400">{state?.errors?.email[0]}</div>)}
         </label>
         <label>Message: <br/> 
           <textarea 
             name="message" 
             placeholder="Enter message"
-            //defaultValue={state?.inputs?.message || '' } 
+            defaultValue={state?.inputs?.message || '' } 
             //value={state?.message || ''}
             //onChange={(e) => setFormData({...formData, message: e.target.value})}
             required
-            className="rounded-3xl text-gray-800 px-4 py-2 sm:w-full
+            className="rounded-3xl text-gray-800 px-4 py-2 sm:w-full mb-1
             outline outline-offset-2 outline-white focus:outline-offset-4 
             "/>
+          {state?.errors?.message  && (<div className="text-sm text-red-400">{state?.errors?.message[0]}</div>)}
         </label>
+      {state?.errors?.message  && (
+          <div 
+            className="text-sm text-red-400 
+            outline outline-offset-2 px-4 outline-red-400 rounded-3xl">
+          {state.message}
+        </div>)}
         <button 
           disabled={isPending}
           type="submit" className={`w-fit
@@ -90,7 +99,7 @@ export default function ContactForm(){
           hover:outline hover:outline-offset-2 hover:outline-white
           `}
          >
-          Submit
+          {isPending ? "Submitting..." : "Submit"}
         </button>
       </form> 
   </div>)

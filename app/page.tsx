@@ -8,7 +8,7 @@ export default function Home() {
       justify-center items-center h-full
     ">
       <main className="">
-        <TypeWriter text={"Welcome to lques.com"}/> 
+        <TypeWriter text={"Welcome to devlques.com"}/> 
       </main>
     </div>
   );

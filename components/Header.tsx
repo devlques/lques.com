@@ -6,7 +6,7 @@ export default function Header(){
     <div className="">
       <div className="bg-transparent flex flex-row justify-between mx-4 py-4">
        <div className="">
-        <Link href="/" className="">lques.com</Link>
+        <Link href="/" className="">devlques.com</Link>
       </div>
        <div className="flex gap-4"> 
           {/*<NavLink path="/projects" name="Projects"/> */}
