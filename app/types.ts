@@ -13,4 +13,8 @@ export interface ActionResponse {
       value?: string
      }
   };
+  successScreen?: {
+    name?: string,
+    email?: string
+  }
 }

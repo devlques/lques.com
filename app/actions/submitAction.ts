@@ -53,7 +53,7 @@ export default async function submitAction(
   if (!validatedData.success) {
     return {
       success: validatedData.success,
-      errorMessage: "Please fix the errors in order to submit.",
+      errorMessage: "Please fix the errors and submit again.",
       inputs: {
         name: {
           error: validatedData.error.flatten().fieldErrors.name,
@@ -74,13 +74,9 @@ export default async function submitAction(
     await sendContactEmailSES({ name, email, message });
     return {
       success: true,
-      inputs:{
-        name:{
-          value: name
-        },
-        email:{
-          value: email
-        }
+      successScreen: {
+        name,
+        email
       }
     };
   } catch (error: any) {
