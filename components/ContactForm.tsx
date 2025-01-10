@@ -5,11 +5,11 @@ import { useActionState, useEffect, useState } from "react";
 
 const initialStateBase: ActionResponse = {
   success: false,
-  message: "",
+  errorMessage: "",
   inputs: {
-    name: "",
-    email: "",
-    message: "",
+    name: {},
+    email: {},
+    message:{}
   },
 };
 
@@ -25,14 +25,19 @@ export default function ContactForm() {
   }, [state]);
 
   return showSuccessSubmit ? (
-    <div className="flex h-full items-center justify-center">
+    <div className="flex items-center justify-center size-full">
       <div
-        className="flex flex-col justify-between items-center  
+        className="flex flex-col justify-between items-center w-1/2
           bg-black p-16 border-8 border-white border-double rounded-3xl"
       >
         <div>
-          Your contact request has been sent successfully.
-          <br /> I'll get back to you as soon as possible. <br /> <br /> <br />{" "}
+          Thank you for reaching out, <span className="text-orange-400">{`${state.inputs.name.value}`}</span>!<br/><br/>
+          Your message has been sent successfully,
+          I'll get back to you soon at the email address provided: 
+          <span className="text-orange-400">{` ${state.inputs.email.value}`}</span> 
+          <br/> 
+          <br/> 
+          <br />
           Best,
           <br /> Luis Q.
         </div>
@@ -52,7 +57,7 @@ export default function ContactForm() {
       </div>
     </div>
   ) : (
-    <div className="flex justify-center size-full">
+    <div className="flex size-full justify-center items-center">
       <form
         action={action}
         className="flex flex-col gap-4 basis-2/4 w-full 
@@ -63,35 +68,32 @@ export default function ContactForm() {
           <input
             type="text"
             name="name"
-            defaultValue={state?.inputs?.name || ""}
-            //value={state?.name || ''}
-            //onChange={(e) => setFormData({...formData, name: e.target.value})}
+            defaultValue={state?.inputs?.name?.value || ""}
             placeholder="Jone Jones"
+            required
             className="rounded-3xl mb-2
             outline outline-offset-2 outline-white focus:outline-offset-4 text-gray-800 px-4
           "
           />
-          {state?.errors?.name && (
-            <div className="text-sm text-red-400">{state?.errors?.name[0]}</div>
+          {state?.input?.name?.error?.length > 0 && (
+            <div className="text-orange-400">{state?.input?.name?.error[0]}</div>
           )}
         </label>
         <label>
           Email: <br />
           <input
-            //type="email"
+            type="email"
             name="email"
             placeholder="jone@email.com"
-            defaultValue={state?.inputs?.email || ""}
-            //value={state?.email || ''}
-            //onChange={(e) => setFormData({...formData, email: e.target.value})}
+            defaultValue={state?.inputs?.email?.value || ""}
             required
             className="rounded-3xl mb-2
             outline outline-offset-2 outline-white focus:outline-offset-4  text-gray-800 px-4
            "
           />
-          {state?.errors?.email && (
-            <div className="text-sm text-red-400">
-              {state?.errors?.email[0]}
+          {state?.inputs?.email?.error?.length > 0 && (
+            <div className="text-orange-400">
+              {state?.inputs?.email?.error[0]}
             </div>
           )}
         </label>
@@ -100,28 +102,18 @@ export default function ContactForm() {
           <textarea
             name="message"
             placeholder="Enter message"
-            defaultValue={state?.inputs?.message || ""}
-            //value={state?.message || ''}
-            //onChange={(e) => setFormData({...formData, message: e.target.value})}
+            defaultValue={state?.inputs?.message?.value || ""}
             required
             className="rounded-3xl text-gray-800 px-4 py-2 sm:w-full mb-1
             outline outline-offset-2 outline-white focus:outline-offset-4 
             "
           />
-          {state?.errors?.message && (
-            <div className="text-sm text-red-400">
-              {state?.errors?.message[0]}
+          {state?.inputs?.message?.error?.length > 0 && (
+            <div className="text-orange-400">
+              {state?.inputs?.message?.error[0]}
             </div>
           )}
         </label>
-        {state?.errors?.message && (
-          <div
-            className="text-sm text-red-400 
-            outline outline-offset-2 px-4 outline-red-400 rounded-3xl"
-          >
-            {state.message}
-          </div>
-        )}
         <button
           disabled={isPending}
           type="submit"
@@ -133,6 +125,14 @@ export default function ContactForm() {
         >
           {isPending ? "Submitting..." : "Submit"}
         </button>
+        {state?.errorMessage?.length > 0 && (
+          <div
+            className="text-orange-400 p-4
+             border-2 px-4 border-orange-400 border-dashed rounded-3xl"
+          >
+            {state.errorMessage}
+          </div>
+        )}
       </form>
     </div>
   );

@@ -6,17 +6,15 @@ import { z } from "zod";
 const awsConfig = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: "us-west-2",
+  region: process.env.AWS_REGION
 };
 
 const contactFormSchema = z.object({
-  name: z
-    .string()
-    .min(1, "Name is required.")
-    .max(20, "Name cannot be more than 25 characters long"),
-  email: z.string().email("Please provide a valid email address."),
-  message: z.string().min(50, "Message should be at least 50 characters long."),
+  name: z.string().trim().min(1, "Name is required.").max(20, "Name cannot exceed 20 characters."),
+  email: z.string().trim().email("Please provide a valid email address."),
+  message: z.string().trim().min(30, "Message should be at least 30 characters."),
 });
+
 async function sendContactEmailSES({ ...props }: ContactFormData) {
   const ses = new SESv2Client(awsConfig);
   const input = {
@@ -31,13 +29,8 @@ async function sendContactEmailSES({ ...props }: ContactFormData) {
           Charset: "UTF-8",
         },
         Body: {
-          // Body
           Text: {
-            Data: props.message, // required
-            Charset: "UTF-8",
-          },
-          Html: {
-            Data: "", // required
+            Data: props.message, 
             Charset: "UTF-8",
           },
         },
@@ -52,46 +45,50 @@ export default async function submitAction(
   prevState: ActionResponse,
   formData: FormData,
 ): Promise<ActionResponse> {
-  let successResult = false;
-  let messageResult = "";
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const message = formData.get("message") as string;
 
   const validatedData = contactFormSchema.safeParse({ name, email, message });
-  console.log("submitAction.validatedData", validatedData);
   if (!validatedData.success) {
-    console.log(validatedData.error.flatten().fieldErrors);
     return {
       success: validatedData.success,
-      errors: validatedData.error.flatten().fieldErrors,
-      message: "Please fix the errors in order to submit.",
+      errorMessage: "Please fix the errors in order to submit.",
       inputs: {
-        ...prevState.inputs,
+        name: {
+          error: validatedData.error.flatten().fieldErrors.name,
+          value: name
+        },
+         email: {
+          error: validatedData.error.flatten().fieldErrors.email,
+          value: email
+        },
+         message: {
+          error: validatedData.error.flatten().fieldErrors.message,
+          value: message
+        },
       },
     };
   }
   try {
     await sendContactEmailSES({ name, email, message });
-    successResult = true;
-    new Response(
-      JSON.stringify({ success: true, message: "Email sent successfully!" }),
-      { status: 200 },
-    );
+    return {
+      success: true,
+      inputs:{
+        name:{
+          value: name
+        },
+        email:{
+          value: email
+        }
+      }
+    };
   } catch (error: any) {
-    successResult = true;
-    new Response(JSON.stringify({ success: false, error: error.message }), {
-      status: 500,
-    });
+    console.error('Error submitAction:', error.message)
+    return {
+      success: false,
+      errorMessage: 'There was an error submitting the form. Please try again later.',
+    };
   }
-
-  return {
-    success: successResult,
-    message: messageResult,
-    inputs: {
-      name,
-      email,
-      message,
-    },
-  };
 }
+

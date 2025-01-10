@@ -6,9 +6,11 @@ export interface ContactFormData {
 
 export interface ActionResponse {
   success: boolean;
-  message: string;
-  errors?: {
-    [K in keyof ContactFormData]?: string[];
+  errorMessage?: string;
+  inputs?: {
+    [K in keyof ContactFormData]?: {
+      error?: string[] | undefined,
+      value?: string
+     }
   };
-  inputs: ContactFormData;
 }
