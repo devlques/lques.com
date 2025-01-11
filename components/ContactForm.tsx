@@ -9,7 +9,7 @@ const initialStateBase: ActionResponse = {
   inputs: {
     name: {},
     email: {},
-    message:{}
+    message: {},
   },
 };
 
@@ -20,7 +20,6 @@ export default function ContactForm() {
     initialStateBase,
   );
 
-  
   useEffect(() => {
     setShowSuccessSubmit(state.success);
   }, [state]);
@@ -32,12 +31,16 @@ export default function ContactForm() {
           bg-black p-16 border-8 border-white border-double rounded-3xl"
       >
         <div>
-          Thank you for reaching out, <span className="text-orange-400">{`${state.successScreen.name}`}</span>!.<br/><br/>
-          Your message has been sent successfully,
-          I'll get back to you soon at the email address provided: 
-          <span className="text-orange-400">{` ${state.successScreen.email}`}</span> 
-          <br/> 
-          <br/> 
+          Thank you for reaching out,{" "}
+          <span className="text-orange-400">{`${state.successScreen.name}`}</span>
+          !.
+          <br />
+          <br />
+          Your message has been sent successfully, I'll get back to you soon at
+          the email address provided:
+          <span className="text-orange-400">{` ${state.successScreen.email}`}</span>
+          <br />
+          <br />
           <br />
           Best,
           <br /> Luis Q.
@@ -77,7 +80,9 @@ export default function ContactForm() {
           "
           />
           {state?.input?.name?.error?.length > 0 && (
-            <div className="text-orange-400">{state?.input?.name?.error[0]}</div>
+            <div className="text-orange-400">
+              {state?.input?.name?.error[0]}
+            </div>
           )}
         </label>
         <label>

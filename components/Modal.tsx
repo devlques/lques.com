@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import Image from "next/image";
-import { CAREER_DATA } from "@/app/career/careersData";
+import { CAREER_DATA } from "@/app/career/data";
 
 interface ModalProps {
   openStatus: boolean;
@@ -74,7 +74,7 @@ export default function Modal({
                 )}
                 <div className="border-b border-dashed">
                   <span className="text-white">Role: </span>
-                  {` ${project.roleDescription}`}
+                  {` ${project.roleDescription}`}{" "}
                 </div>
                 <div>
                   <span className="text-white">Techstack: </span>
@@ -86,17 +86,23 @@ export default function Modal({
         </div>
         <div className="flex flex-col items-center order-first sm:order-last">
           <button
-            className="sm:hidden
-          bg-white rounded-full h-fit cursor-pointer
-          hover:bg-black hover:text-white hover:border-white text-black
-          hover:outline hover:outline-offset-2 hover:outline-white
-          "
             type="button"
             onClick={() => setOpenStatus(false)}
           >
-            <IoCloseOutline size={60} />
+            <IoCloseOutline
+              className="sm:hidden
+                bg-white rounded-full h-fit cursor-pointer
+                hover:bg-black hover:text-white hover:border-white text-black
+                hover:outline hover:outline-offset-2 hover:outline-white"
+              size={60}
+            />
+            <div
+              className="text-4xl px-2 hidden sm:block hover:border-white rounded-2xl
+                hover:outline hover:outline-offset-2 hover:outline-white"
+            >
+              ESC
+            </div>
           </button>
-          <div className="text-4xl hidden sm:block">ESC</div>
         </div>
       </div>
     )

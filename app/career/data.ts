@@ -96,3 +96,13 @@ export const CAREER_DATA = [
     ],
   },
 ];
+
+export const DOWNLOADABLE_DOCS = [
+  {
+    id: "1",
+    title: "View or download my CV",
+    name: "LuisQuesadaCV.pdf",
+    source:
+      "https://devlques-docs.s3.us-west-2.amazonaws.com/LuisQuesadaCV_2025.pdf",
+  },
+];

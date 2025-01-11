@@ -9,12 +9,32 @@ export interface ActionResponse {
   errorMessage?: string;
   inputs?: {
     [K in keyof ContactFormData]?: {
-      error?: string[] | undefined,
-      value?: string
-     }
+      error?: string[] | undefined;
+      value?: string;
+    };
   };
   successScreen?: {
-    name?: string,
-    email?: string
-  }
+    name?: string;
+    email?: string;
+  };
+}
+
+export interface ControlElements {
+  upArrow: HTMLElement;
+  downArrow: HTMLElement;
+  rightArrow: HTMLElement;
+  leftArrow: HTMLElement;
+  spaceKey: HTMLElement;
+}
+
+export interface EventInteractionControls {
+  keyCode?: string;
+  iconId?: string;
+  snipper: HTMLElement;
+  snipperContainer: HTMLElement;
+  position: any;
+  moved: boolean;
+  step: number;
+  setDataId: (id: string) => void;
+  controlElements: ControlElements;
 }

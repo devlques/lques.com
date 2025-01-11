@@ -6,13 +6,20 @@ import { z } from "zod";
 const awsConfig = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION
+  region: process.env.AWS_REGION,
 };
 
 const contactFormSchema = z.object({
-  name: z.string().trim().min(1, "Name is required.").max(20, "Name cannot exceed 20 characters."),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Name is required.")
+    .max(20, "Name cannot exceed 20 characters."),
   email: z.string().trim().email("Please provide a valid email address."),
-  message: z.string().trim().min(30, "Message should be at least 30 characters."),
+  message: z
+    .string()
+    .trim()
+    .min(30, "Message should be at least 30 characters."),
 });
 
 async function sendContactEmailSES({ ...props }: ContactFormData) {
@@ -30,7 +37,7 @@ async function sendContactEmailSES({ ...props }: ContactFormData) {
         },
         Body: {
           Text: {
-            Data: props.message, 
+            Data: props.message,
             Charset: "UTF-8",
           },
         },
@@ -57,15 +64,15 @@ export default async function submitAction(
       inputs: {
         name: {
           error: validatedData.error.flatten().fieldErrors.name,
-          value: name
+          value: name,
         },
-         email: {
+        email: {
           error: validatedData.error.flatten().fieldErrors.email,
-          value: email
+          value: email,
         },
-         message: {
+        message: {
           error: validatedData.error.flatten().fieldErrors.message,
-          value: message
+          value: message,
         },
       },
     };
@@ -76,15 +83,15 @@ export default async function submitAction(
       success: true,
       successScreen: {
         name,
-        email
-      }
+        email,
+      },
     };
   } catch (error: any) {
-    console.error('Error submitAction:', error.message)
+    console.error("Error submitAction:", error.message);
     return {
       success: false,
-      errorMessage: 'There was an error submitting the form. Please try again later.',
+      errorMessage:
+        "There was an error submitting the form. Please try again later.",
     };
   }
 }
-
