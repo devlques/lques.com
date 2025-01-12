@@ -29,7 +29,7 @@ export const spaceElPressedHandler = (
     const duck = document.querySelector(`#duckItem${i}`) as HTMLElement;
     if (duck.classList.contains("faster-move-effect")) {
       const dataId = (i + 1).toString();
-      duck.style.backgroundColor = "orange";
+      duck.style.backgroundColor = "#FB923C";
       setTimeout(() => {
         setDataId(dataId);
         setOpenModal(true);

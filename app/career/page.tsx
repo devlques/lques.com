@@ -219,22 +219,23 @@ export default function Career() {
 
   const Timeline = memo(() => {
     return (
-      <div id="timeline" className="w-full overflow-hidden mt-auto">
-        <div className="flex w-full">
+      <div id="timeline" className="flex flex-col size-full justify-center">
           <div
             id="timeline-row"
-            className="flex flex-row-reverse w-full justify-between timeline-effect py-2"
+            className="flex flex-row-reverse justify-between timeline-effect gap-4 sm:gap-0"
           >
             {CAREER_DATA.map((data, i) => {
               return (
                 <div
                   key={"dataName" + i}
-                  className="flex flex-col relative items-center"
+                  className="flex flex-col flex-1 relative items-center text-nowrap overflow-hidden p-2 gap-2 h-full"
                 >
-                  <span className=""> {data.company} </span>
-                  <span className=""> {data.title} </span>
-                  <span className=""> {data.period} </span>
-                  <div className="w-fit relative">
+                  <div className="flex flex-col self-start sm:self-center items-start sm:items-center">
+                    <span className="text-sm sm:text-2xl"> {data.company} </span>
+                    <span className="text-sm sm:text-2xl"> {data.title} </span>
+                    <span className="text-sm sm:text-2xl"> {data.period} </span>
+                  </div>
+                  <div className="relative">
                     <div className="transform scale-x-[-1]">
                       <Image
                         id={`duckItem${i}`}
@@ -260,7 +261,6 @@ export default function Career() {
               );
             })}
           </div>
-        </div>
       </div>
     );
   });
@@ -287,7 +287,7 @@ export default function Career() {
       />
       <div
         id="snipper"
-        className="size-24 rounded-full bg-transparent border-2 absolute hidden z-30"
+        className="size-16 sm:size-24 rounded-full bg-transparent border-2 absolute hidden z-30"
       >
         <div className="h-full border border-white border-dashed left-1/2 absolute"></div>
         <div className="w-full border border-white border-dashed top-1/2 absolute"></div>
@@ -295,10 +295,10 @@ export default function Career() {
       <Timeline />
       <div className="flex justify-around items-end gap-4 basis-1/3 w-full">
         <div className="flex flex-col justify-center items-center gap-2">
-          <button id="spaceKeyBtn" className="w-full" type="button">
+          <button id="spaceKeyBtn" className="w-28 sm:w-full" type="button">
             <RiSpace id="spaceKey" size={50} style={{ ...spaceKeyStyles }} />
           </button>
-          <div className="text-sm">
+          <div className="hidden sm:block text-sm">
             Fire with space key or clicking the icon
           </div>
         </div>
@@ -334,7 +334,7 @@ export default function Career() {
               />
             </button>
           </div>
-          <div className="text-sm">
+          <div className="hidden sm:block text-sm">
             Move with arrow keys or clicking the icons
           </div>
         </div>
