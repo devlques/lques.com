@@ -36,5 +36,6 @@ export interface EventInteractionControls {
   moved: boolean;
   step: number;
   setDataId: (id: string) => void;
+  setOpenModal: (open: boolean) => void;
   controlElements: ControlElements;
 }
