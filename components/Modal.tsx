@@ -33,7 +33,7 @@ export default function Modal({
       >
         <div className="flex flex-col items-center self-center sm:basis-2/8 sm:self-end order-last sm:order-first gap-2">
            <a
-              href=""
+              href="https://files.devlques.com/cv.pdf"
               target="_blank"
               className="text-2xl font-bold text-nowrap p-2 border-2 border-white rounded-2xl
                 hover:bg-white hover:text-black hover:outline hover:outline-offset-4 hover:outline-white"
