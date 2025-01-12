@@ -25,10 +25,10 @@ export default function ContactForm() {
   }, [state]);
 
   return showSuccessSubmit ? (
-    <div className="flex items-center justify-center size-full">
+    <div className="flex items-center justify-center size-full text-xl sm:text-2xl">
       <div
-        className="flex flex-col justify-between items-center w-1/2
-          bg-black p-16 border-8 border-white border-double rounded-3xl"
+        className="flex flex-col justify-between items-center w-11/12 sm:w-1/2
+          bg-black p-8 sm:p-16 border-8 border-white border-double rounded-3xl"
       >
         <div>
           Thank you for reaching out,{" "}
@@ -61,7 +61,7 @@ export default function ContactForm() {
       </div>
     </div>
   ) : (
-    <div className="flex size-full justify-center items-center">
+    <div className="flex size-full justify-center items-center text-xl sm:text-2xl">
       <form
         action={action}
         className="flex flex-col gap-4 basis-2/4 w-full 
@@ -113,6 +113,7 @@ export default function ContactForm() {
             className="rounded-3xl text-gray-800 px-4 py-2 sm:w-full mb-1
             outline outline-offset-2 outline-white focus:outline-offset-4 
             "
+            rows={4}
           />
           {state?.inputs?.message?.error?.length > 0 && (
             <div className="text-orange-400">
