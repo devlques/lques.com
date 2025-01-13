@@ -4,9 +4,11 @@ import { ActionResponse, ContactFormData } from "../types";
 import { z } from "zod";
 
 const awsConfig = {
-  accessKeyId: process.env.DEVLQUES_AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.DEVLQUES_AWS_SECRET_ACCESS_KEY,
-  region: process.env.DEVLQUES_AWS_REGION,
+  region: process.env.DEVLQUES_AWS_REGION as string,
+  credentials: {
+    accessKeyId: process.env.DEVLQUES_AWS_ACCESS_KEY_ID as string,
+    secretAccessKey: process.env.DEVLQUES_AWS_SECRET_ACCESS_KEY as string,
+  },
 };
 
 const contactFormSchema = z.object({
