@@ -4,9 +4,9 @@ import { ActionResponse, ContactFormData } from "../types";
 import { z } from "zod";
 
 const awsConfig = {
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION,
+  accessKeyId: process.env.DEVLQUES_AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.DEVLQUES_AWS_SECRET_ACCESS_KEY,
+  region: process.env.DEVLQUES_AWS_REGION,
 };
 
 const contactFormSchema = z.object({
@@ -27,7 +27,7 @@ async function sendContactEmailSES({ ...props }: ContactFormData) {
   const input = {
     FromEmailAddress: props.email,
     Destination: {
-      ToAddresses: [process.env.CONTACT_EMAIL as string],
+      ToAddresses: [process.env.DEVLQUES_CONTACT_EMAIL as string],
     },
     Content: {
       Simple: {
@@ -81,6 +81,7 @@ export default async function submitAction(
     await sendContactEmailSES({ name, email, message });
     return {
       success: true,
+      errorMessage: "",
       successScreen: {
         name,
         email,

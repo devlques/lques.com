@@ -131,7 +131,7 @@ export default function ContactForm() {
         >
           {isPending ? "Submitting..." : "Submit"}
         </button>
-        {state?.errorMessage?.length && (
+        {state?.errorMessage?.length > 0  && (
           <div
             className="text-orange-400 p-4 
              border-2 px-4 border-orange-400 border-dashed rounded-3xl"
