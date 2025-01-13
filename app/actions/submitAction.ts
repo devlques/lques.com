@@ -8,9 +8,6 @@ const SECRET_ACCESS_KEY = process.env.DEVLQUES_AWS_SECRET_ACCESS_KEY as string
 const REGION = process.env.DEVLQUES_AWS_REGION as string;
 const CONTACT_EMAIL = process.env.DEVLQUES_CONTACT_EMAIL as string
 
-if (!ACCESS_KEY_ID || !SECRET_ACCESS_KEY) {
-  throw new Error("AWS credentials are missing");
-}
 const awsConfig = {
   region: REGION,
   credentials: {
