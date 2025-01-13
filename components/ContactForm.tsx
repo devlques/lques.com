@@ -15,9 +15,8 @@ const initialStateBase: ActionResponse = {
 
 export default function ContactForm() {
   const [showSuccessSubmit, setShowSuccessSubmit] = useState<boolean>(false);
-  const [state, action, isPending] = useActionState<any, any>(
-    submitAction,
-    initialStateBase,
+  const [state, action, isPending] = useActionState(
+    submitAction, initialStateBase,
   );
 
   useEffect(() => {
@@ -32,13 +31,13 @@ export default function ContactForm() {
       >
         <div>
           Thank you for reaching out,{" "}
-          <span className="text-orange-400">{`${state.successScreen.name}`}</span>
+          <span className="text-orange-400">{`${state?.successScreen?.name}`}</span>
           !.
           <br />
           <br />
-          Your message has been sent successfully, I'll get back to you soon at
+          Your message has been sent successfully, I will get back to you soon at
           the email address provided:
-          <span className="text-orange-400">{` ${state.successScreen.email}`}</span>
+          <span className="text-orange-400">{` ${state?.successScreen?.email}`}</span>
           <br />
           <br />
           <br />

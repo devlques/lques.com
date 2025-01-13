@@ -27,6 +27,7 @@ export default function TypeWriter({ text }: TypeWriterProps) {
         }, 100);
       }
     }
+  //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <span>{typing}</span>;

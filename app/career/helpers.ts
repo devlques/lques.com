@@ -63,6 +63,8 @@ export const eventInteractionControls = ({
     setDataId,
     setOpenModal,
   } = props;
+
+  let moved = false;
   if (keyCode === "space" || iconId === "spaceKey") {
     spaceElPressedHandler(
       snipper,
@@ -75,7 +77,7 @@ export const eventInteractionControls = ({
     if (position.y > 20) {
       arrowElPressedHandler(controlElements.upArrow);
       position.y -= step;
-      props.moved = true;
+      moved = true;
     }
   }
   if (keyCode === "arrowdown" || iconId === "downArrow") {
@@ -85,24 +87,24 @@ export const eventInteractionControls = ({
     ) {
       arrowElPressedHandler(controlElements.downArrow);
       position.y += step;
-      props.moved = true;
+      moved = true;
     }
   }
   if (keyCode === "arrowleft" || iconId === "leftArrow") {
     if (position.x > 20) {
       arrowElPressedHandler(controlElements.leftArrow);
       position.x -= step;
-      props.moved = true;
+      moved = true;
     }
   }
   if (keyCode === "arrowright" || iconId === "rightArrow") {
     if (position.x < snipperContainer.offsetWidth - snipper.offsetWidth - 20) {
       arrowElPressedHandler(controlElements.rightArrow);
       position.x += step;
-      props.moved = true;
+      moved = true;
     }
   }
-  if (props.moved) {
+  if (moved) {
     if (snipper) {
       snipper.style.transform = `translate(${position.x}px, ${position.y}px)`;
     }

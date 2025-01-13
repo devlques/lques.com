@@ -2,6 +2,7 @@
 import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 import { ActionResponse, ContactFormData } from "../types";
 import { z } from "zod";
+import Error from "next/error";
 
 const awsConfig = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -86,8 +87,12 @@ export default async function submitAction(
         email,
       },
     };
-  } catch (error: any) {
-    console.error("Error submitAction:", error.message);
+  } catch (error: unknown) {
+    if(error instanceof Error){
+      console.error("Error at submitAction:", error.message);
+    }else{
+      console.error("Error at submitAction");
+    }
     return {
       success: false,
       errorMessage:

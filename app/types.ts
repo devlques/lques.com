@@ -27,15 +27,25 @@ export interface ControlElements {
   spaceKey: HTMLElement;
 }
 
+export interface Position  {
+  x: number;
+  y: number
+}
 export interface EventInteractionControls {
   keyCode?: string;
   iconId?: string;
   snipper: HTMLElement;
   snipperContainer: HTMLElement;
-  position: any;
-  moved: boolean;
+  position: Position;
   step: number;
   setDataId: (id: string) => void;
   setOpenModal: (open: boolean) => void;
   controlElements: ControlElements;
 }
+
+export interface ModalProps {
+  openStatus: boolean;
+  setOpenStatus: (open:boolean) => void;
+  selectedDataId: string;
+}
+

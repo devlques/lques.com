@@ -1,15 +1,9 @@
-"use client";
-
 import { useEffect } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import Image from "next/image";
 import { CAREER_DATA } from "@/app/career/data";
+import { ModalProps } from "@/app/types";
 
-interface ModalProps {
-  openStatus: boolean;
-  setOpenStatus: any;
-  selectedDataId: string;
-}
 export default function Modal({
   openStatus,
   setOpenStatus,
@@ -17,7 +11,7 @@ export default function Modal({
 }: ModalProps) {
   useEffect(() => {
     setOpenStatus(openStatus);
-  }, [openStatus]);
+  }, [openStatus,setOpenStatus]);
 
   const carrerData = CAREER_DATA.find((d) => d.id === selectedDataId);
 

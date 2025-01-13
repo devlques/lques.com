@@ -26,7 +26,7 @@ export default function Career() {
     (snipper: HTMLElement) => snipper.getBoundingClientRect(),
     [],
   );
-  const checkOverlap = useCallback((duckRect: any, snipperRec: any) => {
+  const checkOverlap = useCallback((duckRect: DOMRect, snipperRec: DOMRect) => {
     const maxTop = Math.max(snipperRec.top, duckRect.top);
     const minTop = Math.min(snipperRec.top, duckRect.top);
     const maxLeft = Math.max(snipperRec.left, duckRect.left);
@@ -95,7 +95,6 @@ export default function Career() {
     };
 
     const step = 15;
-    let moved = false;
 
     if (snipper) {
       snipper.classList.remove("hidden");
@@ -131,7 +130,6 @@ export default function Career() {
         snipper,
         snipperContainer,
         position,
-        moved,
         step,
         setDataId,
         setOpenModal,
@@ -174,7 +172,6 @@ export default function Career() {
         iconId,
         snipperContainer,
         position,
-        moved,
         step,
         setDataId,
         setOpenModal,
@@ -215,7 +212,8 @@ export default function Career() {
       });
       clearInterval(duckTargetInterval);
     };
-  }, []);
+  //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); 
 
   const Timeline = memo(() => {
     return (
@@ -264,6 +262,7 @@ export default function Career() {
       </div>
     );
   });
+  Timeline.displayName = "TimelineCmpt"
 
   const arrowStyles = {
     borderRadius: "10px",
