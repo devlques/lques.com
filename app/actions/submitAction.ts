@@ -3,11 +3,19 @@ import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 import { ActionResponse, ContactFormData } from "../types";
 import { z } from "zod";
 
+const ACCESS_KEY_ID = process.env.DEVLQUES_AWS_ACCESS_KEY_ID as string;
+const SECRET_ACCESS_KEY = process.env.DEVLQUES_AWS_SECRET_ACCESS_KEY as string
+const REGION = process.env.DEVLQUES_AWS_REGION as string;
+const CONTACT_EMAIL = process.env.DEVLQUES_CONTACT_EMAIL as string
+
+if (!ACCESS_KEY_ID || !SECRET_ACCESS_KEY) {
+  throw new Error("AWS credentials are missing");
+}
 const awsConfig = {
-  region: process.env.DEVLQUES_AWS_REGION as string,
+  region: REGION,
   credentials: {
-    accessKeyId: process.env.DEVLQUES_AWS_ACCESS_KEY_ID as string,
-    secretAccessKey: process.env.DEVLQUES_AWS_SECRET_ACCESS_KEY as string,
+    accessKeyId: ACCESS_KEY_ID,
+    secretAccessKey: SECRET_ACCESS_KEY,
   },
 };
 
@@ -25,11 +33,12 @@ const contactFormSchema = z.object({
 });
 
 async function sendContactEmailSES({ ...props }: ContactFormData) {
+  console.log('PROCESS.ENV', process.env)
   const ses = new SESv2Client(awsConfig);
   const input = {
     FromEmailAddress: props.email,
     Destination: {
-      ToAddresses: [process.env.DEVLQUES_CONTACT_EMAIL as string],
+      ToAddresses: [CONTACT_EMAIL],
     },
     Content: {
       Simple: {
