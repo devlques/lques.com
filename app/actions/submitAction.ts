@@ -94,8 +94,6 @@ export default async function submitAction(
     console.error("Error at submitAction:", error?.message);
     return {
       success: false,
-      errorMessage:
-        "There was an error submitting the form. Please try again later.",
-    };
+      errorMessage: error?.message || "There was an error submitting the form. Please try again later.", };
   }
 }
