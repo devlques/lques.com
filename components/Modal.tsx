@@ -11,7 +11,7 @@ export default function Modal({
 }: ModalProps) {
   useEffect(() => {
     setOpenStatus(openStatus);
-  }, [openStatus,setOpenStatus]);
+  }, [openStatus, setOpenStatus]);
 
   const carrerData = CAREER_DATA.find((d) => d.id === selectedDataId);
 
@@ -26,12 +26,14 @@ export default function Modal({
     "
       >
         <div className="flex flex-col items-center self-center sm:basis-2/8 sm:self-end order-last sm:order-first gap-2">
-           <a
-              href="https://files.devlques.com/cv.pdf"
-              target="_blank"
-              className="text-2xl font-bold text-nowrap p-2 border-2 border-white rounded-2xl
+          <a
+            href="https://files.devlques.com/cv.pdf"
+            target="_blank"
+            className="text-2xl font-bold text-nowrap p-2 border-2 border-white rounded-2xl
                 hover:bg-white hover:text-black hover:outline hover:outline-offset-4 hover:outline-white"
-             > DOWNLOAD CV
+          >
+            {" "}
+            DOWNLOAD CV
           </a>
           <Image
             className="sm:w-36"
@@ -87,10 +89,7 @@ export default function Modal({
           })}
         </div>
         <div className="flex flex-col basis-1/8 items-center order-first sm:order-last">
-          <button
-            type="button"
-            onClick={() => setOpenStatus(false)}
-          >
+          <button type="button" onClick={() => setOpenStatus(false)}>
             <IoCloseOutline
               className="sm:hidden size-12 
                 bg-white rounded-full h-fit cursor-pointer

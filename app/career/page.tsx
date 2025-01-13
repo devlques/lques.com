@@ -212,57 +212,57 @@ export default function Career() {
       });
       clearInterval(duckTargetInterval);
     };
-  //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); 
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const Timeline = memo(() => {
     return (
       <div id="timeline" className="flex flex-col size-full justify-center">
-          <div
-            id="timeline-row"
-            className="flex flex-row-reverse justify-between timeline-effect gap-4 sm:gap-0"
-          >
-            {CAREER_DATA.map((data, i) => {
-              return (
-                <div
-                  key={"dataName" + i}
-                  className="flex flex-col flex-1 relative items-center text-nowrap overflow-hidden p-2 gap-2 h-full"
-                >
-                  <div className="flex flex-col self-start sm:self-center items-start sm:items-center">
-                    <span className="text-sm sm:text-2xl"> {data.company} </span>
-                    <span className="text-sm sm:text-2xl"> {data.title} </span>
-                    <span className="text-sm sm:text-2xl"> {data.period} </span>
-                  </div>
-                  <div className="relative">
-                    <div className="transform scale-x-[-1]">
-                      <Image
-                        id={`duckItem${i}`}
-                        className=" move-effect rounded-full duckItem"
-                        alt="duck pixel art"
-                        src="/pixelDuckNoBg.svg"
-                        width={150}
-                        height={150}
-                        unoptimized
-                      />
-                    </div>
+        <div
+          id="timeline-row"
+          className="flex flex-row-reverse justify-between timeline-effect gap-4 sm:gap-0"
+        >
+          {CAREER_DATA.map((data, i) => {
+            return (
+              <div
+                key={"dataName" + i}
+                className="flex flex-col flex-1 relative items-center text-nowrap overflow-hidden p-2 gap-2 h-full"
+              >
+                <div className="flex flex-col self-start sm:self-center items-start sm:items-center">
+                  <span className="text-sm sm:text-2xl"> {data.company} </span>
+                  <span className="text-sm sm:text-2xl"> {data.title} </span>
+                  <span className="text-sm sm:text-2xl"> {data.period} </span>
+                </div>
+                <div className="relative">
+                  <div className="transform scale-x-[-1]">
                     <Image
-                      id={`dropItem${i}`}
-                      className="absolute top-1/4 left-1/4 z-10 dropItem hidden"
-                      alt="drop of water pixel art"
-                      src="/dropWaterPixA.svg"
-                      width={40}
-                      height={40}
+                      id={`duckItem${i}`}
+                      className=" move-effect rounded-full duckItem"
+                      alt="duck pixel art"
+                      src="/pixelDuckNoBg.svg"
+                      width={150}
+                      height={150}
                       unoptimized
                     />
                   </div>
+                  <Image
+                    id={`dropItem${i}`}
+                    className="absolute top-1/4 left-1/4 z-10 dropItem hidden"
+                    alt="drop of water pixel art"
+                    src="/dropWaterPixA.svg"
+                    width={40}
+                    height={40}
+                    unoptimized
+                  />
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   });
-  Timeline.displayName = "TimelineCmpt"
+  Timeline.displayName = "TimelineCmpt";
 
   const arrowStyles = {
     borderRadius: "10px",

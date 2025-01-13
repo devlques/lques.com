@@ -27,9 +27,9 @@ export interface ControlElements {
   spaceKey: HTMLElement;
 }
 
-export interface Position  {
+export interface Position {
   x: number;
-  y: number
+  y: number;
 }
 export interface EventInteractionControls {
   keyCode?: string;
@@ -45,7 +45,6 @@ export interface EventInteractionControls {
 
 export interface ModalProps {
   openStatus: boolean;
-  setOpenStatus: (open:boolean) => void;
+  setOpenStatus: (open: boolean) => void;
   selectedDataId: string;
 }
-

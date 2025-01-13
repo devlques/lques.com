@@ -12,7 +12,7 @@ export default function Header() {
         </div>
         <div className="flex gap-4">
           {/*<NavLink path="/projects" name="Projects"/> */}
-          <NavLink path="/contact" name="Contact" />
+          {/*<NavLink path="/contact" name="Contact" /> */}
           <NavLink path="/career" name="Career" />
         </div>
       </div>

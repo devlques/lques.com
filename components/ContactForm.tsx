@@ -16,7 +16,8 @@ const initialStateBase: ActionResponse = {
 export default function ContactForm() {
   const [showSuccessSubmit, setShowSuccessSubmit] = useState<boolean>(false);
   const [state, action, isPending] = useActionState(
-    submitAction, initialStateBase,
+    submitAction,
+    initialStateBase,
   );
 
   useEffect(() => {
@@ -35,8 +36,8 @@ export default function ContactForm() {
           !.
           <br />
           <br />
-          Your message has been sent successfully, I will get back to you soon at
-          the email address provided:
+          Your message has been sent successfully, I will get back to you soon
+          at the email address provided:
           <span className="text-orange-400">{` ${state?.successScreen?.email}`}</span>
           <br />
           <br />
@@ -78,7 +79,7 @@ export default function ContactForm() {
             outline outline-offset-2 outline-white focus:outline-offset-4 text-gray-800 px-4
           "
           />
-          {state?.inputs?.name?.error?.length  && (
+          {state?.inputs?.name?.error?.length && (
             <div className="text-orange-400">
               {state?.inputs?.name?.error[0]}
             </div>
@@ -131,7 +132,7 @@ export default function ContactForm() {
         >
           {isPending ? "Submitting..." : "Submit"}
         </button>
-        {state?.errorMessage?.length > 0  && (
+        {state?.errorMessage?.length > 0 && (
           <div
             className="text-orange-400 p-4 
              border-2 px-4 border-orange-400 border-dashed rounded-3xl"

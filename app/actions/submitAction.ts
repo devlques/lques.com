@@ -4,9 +4,9 @@ import { ActionResponse, ContactFormData } from "../types";
 import { z } from "zod";
 
 const ACCESS_KEY_ID = process.env.DEVLQUES_AWS_ACCESS_KEY_ID as string;
-const SECRET_ACCESS_KEY = process.env.DEVLQUES_AWS_SECRET_ACCESS_KEY as string
-const REGION = process.env.DEVLQUES_AWS_REGION as string;
-const CONTACT_EMAIL = process.env.DEVLQUES_CONTACT_EMAIL as string
+const SECRET_ACCESS_KEY = process.env.DEVLQUES_AWS_SECRET_ACCESS_KEY as string;
+const REGION = "us-west-2";
+const CONTACT_EMAIL = "ontact@email.devlques.com";
 
 const awsConfig = {
   region: REGION,
@@ -30,7 +30,6 @@ const contactFormSchema = z.object({
 });
 
 async function sendContactEmailSES({ ...props }: ContactFormData) {
-  console.log('PROCESS.ENV', process.env)
   const ses = new SESv2Client(awsConfig);
   const input = {
     FromEmailAddress: props.email,
@@ -95,11 +94,14 @@ export default async function submitAction(
         email,
       },
     };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Error at submitAction:", error?.message);
     return {
       success: false,
-      errorMessage: error?.message || "There was an error submitting the form. Please try again later.", };
+      errorMessage:
+        error?.message ||
+        "There was an error submitting the form. Please try again later.",
+    };
   }
 }
