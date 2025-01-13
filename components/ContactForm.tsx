@@ -78,9 +78,9 @@ export default function ContactForm() {
             outline outline-offset-2 outline-white focus:outline-offset-4 text-gray-800 px-4
           "
           />
-          {state?.input?.name?.error?.length > 0 && (
+          {state?.inputs?.name?.error?.length  && (
             <div className="text-orange-400">
-              {state?.input?.name?.error[0]}
+              {state?.inputs?.name?.error[0]}
             </div>
           )}
         </label>
@@ -96,7 +96,7 @@ export default function ContactForm() {
             outline outline-offset-2 outline-white focus:outline-offset-4  text-gray-800 px-4
            "
           />
-          {state?.inputs?.email?.error?.length > 0 && (
+          {state?.inputs?.email?.error?.length && (
             <div className="text-orange-400">
               {state?.inputs?.email?.error[0]}
             </div>
@@ -114,7 +114,7 @@ export default function ContactForm() {
             "
             rows={4}
           />
-          {state?.inputs?.message?.error?.length > 0 && (
+          {state?.inputs?.message?.error?.length && (
             <div className="text-orange-400">
               {state?.inputs?.message?.error[0]}
             </div>
@@ -131,7 +131,7 @@ export default function ContactForm() {
         >
           {isPending ? "Submitting..." : "Submit"}
         </button>
-        {state?.errorMessage?.length > 0 && (
+        {state?.errorMessage?.length && (
           <div
             className="text-orange-400 p-4 
              border-2 px-4 border-orange-400 border-dashed rounded-3xl"
